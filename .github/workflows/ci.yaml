@@ -1,0 +1,62 @@
+name: Examples CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test-examples:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        example:
+          - getting_started
+          - coordinator
+          - dspy_react
+          - langchain_tool_calling
+          - litellm_agent
+          - agent_evaluation_dspy
+          - safe_agents_guardrails
+          - triage_agent
+          - shared_context
+          - multi_agent_conversation
+          - tool_calling
+          - websocket_gateway
+          - a2a
+          - mcp
+
+    name: Test ${{ matrix.example }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies for ${{ matrix.example }}
+        working-directory: ${{ matrix.example }}
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Lint ${{ matrix.example }}
+        working-directory: ${{ matrix.example }}
+        run: |
+          pip install ruff
+          ruff check . || true
+
+      - name: Test ${{ matrix.example }}
+        working-directory: ${{ matrix.example }}
+        run: |
+          if [ -d tests ]; then
+            pip install pytest pytest-asyncio
+            pytest -v
+          else
+            echo "No tests found for ${{ matrix.example }}"
+          fi
