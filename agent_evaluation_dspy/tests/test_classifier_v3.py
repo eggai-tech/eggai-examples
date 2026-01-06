@@ -3,8 +3,8 @@ from os import path
 import pytest
 from dotenv import load_dotenv
 
-from ..src.dspy_modules.classifier_v3 import optimize, load
-from .utilities import load_data, run_evaluation, generate_report
+from src.dspy_modules.classifier_v3 import optimize, load
+from tests.utilities import load_data, run_evaluation, generate_report
 
 
 @pytest.mark.asyncio

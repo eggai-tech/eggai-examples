@@ -45,6 +45,12 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Install guardrails hub validators
+        if: matrix.example == 'safe_agents_guardrails'
+        run: |
+          guardrails hub install hub://guardrails/toxic_language --no-install-local-models
+          guardrails hub install hub://guardrails/detect_pii --no-install-local-models
+
       - name: Lint ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
         run: |
@@ -53,6 +59,8 @@ jobs:
 
       - name: Test ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
+        env:
+          PYTHONPATH: ${{ github.workspace }}/${{ matrix.example }}
         run: |
           if [ -d tests ]; then
             pip install pytest pytest-asyncio

@@ -1,8 +1,8 @@
 import pytest
 from dotenv import load_dotenv
 
-from ..src.dspy_modules.triage_module import triage_module as classifier_v2
-from .utilities import load_data, run_evaluation
+from src.dspy_modules.triage_module import triage_module as classifier_v2
+from tests.utilities import load_data, run_evaluation
 
 
 def test_intent_classifier():

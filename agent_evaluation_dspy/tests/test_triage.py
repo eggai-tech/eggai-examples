@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 
 from eggai import Channel
 
-from ..src.agents.triage import handle_user_message
-from ..datasets.loader import load_dataset
+from src.agents.triage import handle_user_message
+from data.loader import load_dataset
 
 
 
