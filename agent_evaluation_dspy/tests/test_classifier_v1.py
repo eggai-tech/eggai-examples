@@ -4,8 +4,8 @@ import pytest
 from dotenv import load_dotenv
 
 
-from ..src.dspy_modules.classifier_v1 import classifier as classifier_v1
-from .utilities import load_data, run_evaluation, generate_report
+from src.dspy_modules.classifier_v1 import classifier as classifier_v1
+from tests.utilities import load_data, run_evaluation, generate_report
 
 
 @pytest.mark.asyncio

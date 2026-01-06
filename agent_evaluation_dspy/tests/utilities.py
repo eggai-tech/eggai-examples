@@ -5,7 +5,7 @@ from datetime import datetime
 import dspy
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from ..datasets.loader import load_dataset
+from data.loader import load_dataset
 
 
 def load_data(file: str):
