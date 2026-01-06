@@ -1,5 +1,7 @@
--e ../../sdk
+eggai
 a2a-sdk
 httpx
 pydantic
 uvicorn
+pytest
+pytest-asyncio
